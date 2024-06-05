@@ -7,19 +7,20 @@ import static io.restassured.RestAssured.given;
 public class PostEchoTest {
 
     @Test
-    void shouldReturnRequest() {
+    void shouldReturnData() {
         // Given - When - Then
 // Предусловия
+        String message = "Hello";
         given()
                 .baseUri("https://postman-echo.com")
-                .body("some data") // отправляемые данные (заголовки и query можно выставлять аналогично)
+                .body("Morning") // отправляемые данные (заголовки и query можно выставлять аналогично)
 // Выполняемые действия
                 .when()
                 .post("/post")
 // Проверки
                 .then()
                 .statusCode(200)
-                .body(/* --> ваша проверка здесь <-- */)
+                .body("data", org.hamcrest.Matchers.equalTo(message) )
         ;
     }
 }
